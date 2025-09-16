@@ -39,8 +39,6 @@ class GT7Communication(
                         val decoded = decodeSalsa20(rawData)
 
 
-                        // ↓ ここで復号処理を呼び出す
-
                         if (decoded.isNotEmpty()) {
                             val rpm = getFloat(decoded, 0x1C)
                             packetCount++
