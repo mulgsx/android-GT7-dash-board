@@ -27,8 +27,8 @@
 
 受信したRPMデータを視覚化し、UIをカスタマイズした例です。
 
-![Current App Screen](app/assets/photo/git2.png)
-![Current App Screen](app/assets/photo/git3.png)
+![edit App Screen](app/assets/photo/git2.png)
+![edit App Screen2](app/assets/photo/git3.png)
 
 
 ---
