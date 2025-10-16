@@ -35,21 +35,15 @@ fun GT7PacketCounterUI(
         )
 
         Button(onClick = { onStart(ipAddress) }) {
-            Text("受信開始")
+            Text("Start Receiving")
         }
 
         Button(onClick = onStop) {
-            Text("受信停止")
+            Text("Stop Receiving")
         }
 
-        Text("受信パケット数: $packetCount", fontSize = 20.sp)
+        Text("Received Packet Count: $packetCount", fontSize = 20.sp)
         Row {
-            Text(
-                text = "回転数:",
-                fontSize = 20.sp,
-                color = Color.Black,
-                modifier = Modifier.alignByBaseline()
-            )
             Text(
                 text = rpm.toInt().toString(),
                 fontSize = 20.sp,

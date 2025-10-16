@@ -59,7 +59,7 @@ class GT7Communication(
                 }
             }
         } catch (e: Exception) {
-            Log.e("GT7Communication", "通信エラー: ${e.message}", e)
+            Log.e("GT7Communication", "Communication error: ${e.message}", e)
         }
     }
 
@@ -77,7 +77,7 @@ class GT7Communication(
                 sendSocket.send(packet)
             }
         } catch (e: Exception) {
-            Log.e("GT7Communication", "ハートビート送信エラー: ${e.message}", e)
+            Log.e("GT7Communication", "Heartbeat send error: ${e.message}", e)
         }
     }
 
@@ -104,7 +104,7 @@ class GT7Communication(
             val magic = ByteBuffer.wrap(decrypted, 0, 4).order(ByteOrder.LITTLE_ENDIAN).int
             return if (magic == 0x47375330) decrypted else ByteArray(0)
         } catch (e: Exception) {
-            Log.e("GT7Communication", "復号エラー: ${e.message}", e)
+            Log.e("GT7Communication", "Decryption error: ${e.message}", e)
             return ByteArray(0)
         }
     }
