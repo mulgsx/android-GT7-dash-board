@@ -15,7 +15,7 @@
 - **パケット数の表示**: 受信が正しく行われていることを確認できます
 - **RPM (エンジン回転数) の表示**: 受信データからRPMを抽出し、表示します
 
-![Current App Screen](assets/photo/git1.png)
+![Current App Screen](app/assets/photo/git1.png)
 
 ---
 
@@ -26,6 +26,10 @@
 ### 拡張されたダッシュボード例
 
 受信したRPMデータを視覚化し、UIをカスタマイズした例です。
+
+![Current App Screen](app/assets/photo/git2.png)
+![Current App Screen](app/assets/photo/git3.png)
+
 
 ---
 
