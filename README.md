@@ -25,8 +25,8 @@ The established foundation (UDP reception, RPM extraction, Kotlin/Compose UI) al
 
 These examples illustrate the potential for visualizing RPM data and customizing the UI.
 
-![edit App Screen](app/assets/photo/git2.png)
-![edit App Screen2](app/assets/photo/git3.png)
+![edit App Screen](app/assets/photo/git2.jpg)
+![edit App Screen2](app/assets/photo/git3.jpg)
 
 
 ---
