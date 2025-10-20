@@ -1,31 +1,29 @@
 # GT7 Dashboard (Kotlin/Android)
 
-レースゲーム『グランツーリスモ7（GT7）』からUDP通信で送信されるテレメトリーデータを受信し、Kotlin言語とAndroidネイティブ機能を用いてカスタマイズ可能なダッシュボードとして表示するアプリケーションです。
-
+A customizable dashboard application built using Kotlin and native Android features. It receives telemetry data transmitted via UDP communication from the racing game Gran Turismo 7 (GT7) and visualizes it in real-time.
 ---
 
-## 🚀 プロジェクトの現状 (Current Status)
+## Project Status
+The current project has established the core communication infrastructure necessary to receive data from GT7.
 
-現在のプロジェクトは、GT7からのデータを受信するための通信基盤が確立されています。
+### Current Features
 
-### 現在の機能
-
-- **IPアドレス入力**: PlayStationのIPアドレスを設定可能
-- **UDP受信の開始/停止**: データ受信をコントロールするボタン
-- **パケット数の表示**: 受信が正しく行われていることを確認できます
-- **RPM (エンジン回転数) の表示**: 受信データからRPMを抽出し、表示します
+- **IP Address Input**: Allows setting the PlayStation console's IP address.
+- **UDP Receive Control**: Buttons to start and stop data reception.
+- **Packet Counter**: Displays the number of packets received, confirming successful communication.
+- **RPM (Engine Revolutions)**:  Extracts and displays the RPM value from the incoming telemetry data.
 
 ![Current App Screen](app/assets/photo/git1.png)
 
 ---
 
-## ✨ 拡張例と可能性 (Extension Examples & Possibilities)
+## Extension Examples & Possibilities
 
-このプロジェクトの基盤（UDP受信、RPM抽出、Kotlin/Compose UI）を活用することで、以下のような本格的なダッシュボードUIを簡単に構築・拡張できます。
+The established foundation (UDP reception, RPM extraction, Kotlin/Compose UI) allows for easy construction and extension into a full-featured, customizable dashboard UI.
 
-### 拡張されたダッシュボード例
+### Extended Dashboard Example
 
-受信したRPMデータを視覚化し、UIをカスタマイズした例です。
+These examples illustrate the potential for visualizing RPM data and customizing the UI.
 
 ![edit App Screen](app/assets/photo/git2.png)
 ![edit App Screen2](app/assets/photo/git3.png)
@@ -33,30 +31,31 @@
 
 ---
 
-## 📈 Kotlin/Androidネイティブの強みを活かした拡張
+## Leveraging Kotlin/Android Native Strengths
 
-プロジェクトはKotlinで書かれており、Androidの機能を最大限に活用した拡張が可能です。
+The project is written in Kotlin, allowing developers to maximize the use of Android's native capabilities for high performance and rich features.
 
-| 拡張機能 | 実現内容 | 関連する技術要素 |
+
+| Extension Feature | Implementation Detail | Relevant Technology Stack |
 |---------|---------|----------------|
-| **よりリッチなUIの描画** | 回転数バー、ギア表示、速度計、デジタル数字のカスタム表示など、プレビュー画像のようなUIを構築 | Jetpack Compose または Custom View |
-| **データ解析とログ** | 受信したUDPデータを解析し、データベース（Roomなど）やファイルに記録し、後から走行分析に使用する | Kotlin Coroutines, Room DB |
-| **燃料残量/周回数の表示** | 現在の燃料残量や走行中の周回数を表示 | UDPデータ解析 |
-| **ペダル操作量の可視化** | アクセルやブレーキの入力値をリアルタイムで表示し、操作の正確性を確認する | UDPデータ解析 |
+| **Rich UI Drawing** | Build complex UIs like RPM bars, gear indicators, speedometers, and custom digital displays, similar to the preview images. | Jetpack Compose or Custom View |
+| **Data Analysis & Logging** | Parse incoming UDP data and record it to a database (e.g., Room) or files for later post-race analysis. | Kotlin Coroutines, Room DB |
+| **Fuel/Lap Count Display** | Display current fuel level and the number of laps completed during the race. | UDP Data Parsing |
+| **ペPedal Input Visualization** | Visualize throttle and brake input values in real-time to analyze driving precision. | UDP Data Parsing |
 
-このプロジェクトは、Kotlinによる高速なデータ処理と、Androidのネイティブ機能をシームレスに利用できる利点を備えています。
+This project benefits from Kotlin's fast data processing capabilities and the seamless integration of Android's native functionalities.
 
 ---
 
-## 🔧 技術スタック
+## Technical Stack
 
-- **言語**: Kotlin
+- **Language**: Kotlin
 - **UI**: Jetpack Compose
-- **通信**: UDP Socket
-- **プラットフォーム**: Android
+- **Communication**: UDP Socket
+- **Platform**: Android
 
 ---
 
-## 🎯 今後の展開
+## Future Direction
 
-GT7のテレメトリーデータを活用し、レーシングシミュレーターとしてのリアルなダッシュボード体験を提供します。Android端末をセカンドスクリーンとして活用することで、よりイマーシブなゲーム体験が可能になります。
+We aim to leverage GT7's telemetry data to provide a realistic dashboard experience for racing simulators. By using an Android device as a second screen, this project offers a more immersive gaming experience.
