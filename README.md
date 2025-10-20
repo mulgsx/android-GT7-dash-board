@@ -25,8 +25,11 @@ The established foundation (UDP reception, RPM extraction, Kotlin/Compose UI) al
 
 These examples illustrate the potential for visualizing RPM data and customizing the UI.
 
-![edit App Screen2](app/assets/photo/git3.jpg)
-![edit App Screen](app/assets/photo/git2.jpg)
+
+<div style="display: flex; justify-content: center; align-items: center; gap: 20px; min-height: 200px;">
+  <img src="app/assets/photo/git3.jpg" alt="edit App Screen2" width="400">
+  <img src="app/assets/photo/git2.jpg" alt="edit App Screen" width="400">
+</div>
 
 ---
 
