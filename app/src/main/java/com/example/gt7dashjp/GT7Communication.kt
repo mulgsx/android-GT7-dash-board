@@ -11,63 +11,62 @@ import org.bouncycastle.crypto.params.ParametersWithIV
 import org.bouncycastle.crypto.params.KeyParameter
 
 import android.util.Log
-import androidx.compose.ui.geometry.Offset
+import kotlinx.coroutines.*
 
 class GT7Communication(
     private val playstationIp: String,
     private val onPacketReceived: (Int, Float) -> Unit
-) : Thread() {
+) {
 
     private val sendPort = 33739
     private val receivePort = 33740
-    @Volatile private var shallRun = true
     private var packetCount = 0
+    private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+    private var job: Job? = null
 
-    override fun run() {
-        try {
-            DatagramSocket(receivePort).use { socket ->
-                socket.soTimeout = 5000
-                sendHeartbeat()
+    fun start() {
+        job = scope.launch {
+            try {
+                DatagramSocket(receivePort).use { socket ->
+                    socket.soTimeout = 5000
+                    sendHeartbeat()
 
-                while (shallRun) {
-                    try {
-                        val buffer = ByteArray(4096)
-                        val packet = DatagramPacket(buffer, buffer.size)
-                        socket.receive(packet)
+                    val buffer = ByteArray(4096)
+                    while (isActive) {
+                        try {
+                            val packet = DatagramPacket(buffer, buffer.size)
+                            socket.receive(packet)
 
-                        val rawData = packet.data.copyOf(packet.length)
-                        val decoded = decodeSalsa20(rawData)
+                            val rawData = packet.data.copyOf(packet.length)
+                            val decoded = decodeSalsa20(rawData)
 
+                            if (decoded.isNotEmpty()) {
+                                val rpm = getFloat(decoded, 0x1C)
+                                packetCount++
+                                withContext(Dispatchers.Main) {
+                                    onPacketReceived(packetCount, rpm)
+                                }
 
-                        if (decoded.isNotEmpty()) {
-                            val rpm = getFloat(decoded, 0x1C)
-                            packetCount++
-                            onPacketReceived(packetCount, rpm)
+                                if (packetCount % 100 == 0) sendHeartbeat()
+                            }
 
-                            if (packetCount % 100 == 0) sendHeartbeat()
+                        } catch (e: SocketTimeoutException) {
+                            sendHeartbeat()
                         }
-                        //前回の処理
-//                        packetCount++
-//                        onPacketReceived(packetCount)
-//                        if (packetCount % 100 == 0) sendHeartbeat()
-
-
-
-                    } catch (e: SocketTimeoutException) {
-                        sendHeartbeat()
                     }
                 }
+            } catch (e: Exception) {
+                Log.e("GT7Communication", "Communication error: ${e.message}", e)
             }
-        } catch (e: Exception) {
-            Log.e("GT7Communication", "Communication error: ${e.message}", e)
         }
     }
 
     fun stopCommunication() {
-        shallRun = false
+        job?.cancel()
+        job = null
     }
 
-    ///ハートビート送信関数
+    /// Heartbeat send function
     private fun sendHeartbeat() {
         try {
             DatagramSocket().use { sendSocket ->
@@ -81,7 +80,7 @@ class GT7Communication(
         }
     }
 
-    ///復号化関数
+    /// Decryption function
     private fun decodeSalsa20(dat: ByteArray): ByteArray {
         try {
             val key = "Simulator Interface Packet GT7 ver 0.0".toByteArray().copyOf(32)
